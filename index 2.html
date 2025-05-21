@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wedding Invitation</title>
+<style>
+  body {
+    font-family: 'Georgia', serif;
+    background: #f9f6f2;
+    color: #5a4631;
+    margin: 0;
+    padding: 0 20px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  header {
+    text-align: center;
+    padding: 40px 0 30px;
+  }
+  header h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+  }
+  header p {
+    font-size: 1.25rem;
+    color: #8b7e66;
+    margin-top: 5px;
+  }
+  section {
+    margin-bottom: 40px;
+  }
+  h2 {
+    border-bottom: 2px solid #d9cbbd;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    font-weight: normal;
+  }
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+  }
+  .gallery img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease;
+  }
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+  #lightbox {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  #lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 0 15px white;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  input, select, textarea, button {
+    padding: 12px;
+    border: 1px solid #c4bba8;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+  button {
+    background-color: #8b7e66;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #72644b;
+  }
+  .details p {
+    margin: 8px 0;
+    font-size: 1.1rem;
+  }
+  @media (max-width: 480px) {
+    .gallery img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Emma & Liam</h1>
+  <p>We’re getting married! - August 15, 2025</p>
+</header>
+
+<section class="gallery-section">
+  <h2>Our Gallery</h2>
+  <div class="gallery">
+    <img src="photo1.jpg" alt="Couple Photo 1" />
+    <img src="photo2.jpg" alt="Couple Photo 2" />
+    <img src="photo3.jpg" alt="Couple Photo 3" />
+  </div>
+</section>
+
+<section class="details">
+  <h2>Event Details</h2>
+  <p><strong>Date:</strong> August 15, 2025</p>
+  <p><strong>Time:</strong> 4:00 PM</p>
+  <p><strong>Venue:</strong> Sunset Gardens, 123 Beach Road, California</p>
+  <p><strong>Dress Code:</strong> Semi-formal</p>
+</section>
+
+<section class="rsvp-section">
+  <h2>RSVP</h2>
+  <form id="rsvpForm">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <select name="attending" required>
+      <option value="" disabled selected>Will you attend?</option>
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+    <input type="number" name="guests" placeholder="Number of Guests" min="1" required />
+    <textarea name="message" placeholder="Message (optional)" rows="3"></textarea>
+    <button type="submit">Send RSVP</button>
+  </form>
+</section>
+
+<div id="lightbox">
+  <img src="" alt="Expanded photo" />
+</div>
+
+<script>
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = lightbox.querySelector('img');
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImage.src = img.src;
+      lightbox.style.display = 'flex';
+    });
+  });
+  lightbox.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+
+  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for your RSVP, ' + this.name.value + '!');
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
